@@ -7,12 +7,11 @@ class Doors:
     """
 
     def __init__(self, door_number):
-        self.door_number = door_number
-        self.winner = False
-        self.open = False
-        self.user_selection = False
+        self.door_number = door_number # Assigns the door a number to be referenced
+        self.winner = False # Determines if the door is a winner/loser
+        self.user_selection = False # Determines if the user has selected this door
 
-
+# Create door objects 
 door1 = Doors(1)
 door2 = Doors(2)
 door3 = Doors(3)
@@ -22,39 +21,18 @@ list_of_doors = [door1, door2, door3]
 
 
 def randomise_winner():
-    """
-    This function randomly selects a winning door
-    winning_door is an int between 1 and 3 inclusive
-    :return: winning_door
-    """
-    winning_door = randint(1, 3)
-    return winning_door
+
 
 
 def door_selection():
-    """
-    This functions allows the user to select a door
-    user_choice is an int between 1 and 3 inclusive
-    :return: user_choice
-    """
-    # Checks the user entered a valid input
-    while True:
-        try:
-            user_choice = int(input("Select a door 1-3: \n"))
-        except ValueError:
-            print("Invalid entry, select a door between 1 and 3 inclusive.")
-        else:
-            if user_choice not in range(1, 4):
-                print("Invalid door selected, try again")
-            else:
-                return user_choice
 
 
-def switch_door(list_of_doors, user_choice):
+
+def switch_door(list_of_doors, user_choice):#user_choice needs to be created from input function
     """
     This functions allows the user to switch their selected door
     :param list_of_doors: list of doors within the problem
-    :param user_choice: users previously selected door
+    :param user_choice: users selected door
     :return: user_choice
     """
     while True:
@@ -81,9 +59,11 @@ def monty_hall(list_of_doors):
     """
     This function is a text based Monty Hall Problem
     :param list_of_doors: list of doors within the problem
+    :param winning_door: winning door number
+    :pararm user_choice: users selected door
     """
-    winning_door = randomise_winner()
-    user_choice = door_selection()
+    winning_door = randomise_winner() # function need to be created to be called 
+    user_choice = door_selection() # input function need to be created to be called 
 
     # Assigns the selected door to the user
     list_of_doors[user_choice - 1].user_selection = True
@@ -96,20 +76,12 @@ def monty_hall(list_of_doors):
     for door in list_of_doors:
         if not door.user_selection and not door.winner:
             print(f"Door {door.door_number} was empty")
-            list_of_doors.pop(door.door_number - 1)
+            list_of_doors.pop(door.door_number - 1) # Removes the opened door from the list
             break
 
-    user_choice = switch_door(list_of_doors, user_choice)
-
-    if user_choice == winning_door:
-        print(f"You Win. You selected the winning door, door number {winning_door}")
-    else:
-        print(f"You Lose, the winning door was door number {winning_door}")
+    user_choice = switch_door(list_of_doors, user_choice) # User may change their door
+    
+    #Output method required to determine if the user has won
 
 
-def main():
-    while True:
-        print(monty_hall(list_of_doors))
 
-
-main()
