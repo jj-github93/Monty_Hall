@@ -21,6 +21,13 @@ list_of_doors = [door1, door2, door3]
 
 
 def randomise_winner():
+    """
+    This function randomly selects a winning door
+    winning_door is an int between 1 and 3 inclusive
+    :return: winning_door
+    """
+    winning_door = randint(1, 3)
+    return winning_door
 
 
 
@@ -62,7 +69,7 @@ def monty_hall(list_of_doors):
     :param winning_door: winning door number
     :pararm user_choice: users selected door
     """
-    winning_door = randomise_winner() # function need to be created to be called 
+    winning_door = randomise_winner() # randomises winner
     user_choice = door_selection() # input function need to be created to be called 
 
     # Assigns the selected door to the user
