@@ -11,7 +11,6 @@ class Doors:
         self.winner = False  # Determines if the door is a winner/loser
         self.user_selection = False  # Determines if the user has selected this door
 
-
 # Create door objects
 door1 = Doors(1)
 door2 = Doors(2)
@@ -29,6 +28,7 @@ def randomise_winner():
     """
     winning_door = randint(1, 3)
     return winning_door
+
 
 
 def door_selection():
@@ -75,6 +75,9 @@ def monty_hall(list_of_doors):
     winning_door = randomise_winner()  # randomises winner
     user_choice = door_selection()  # input function need to be created to be called
 
+    winning_door = randomise_winner()
+    user_choice = door_selection() # input function need to be created to be called
+
     # Assigns the selected door to the user
     list_of_doors[user_choice - 1].user_selection = True
     # Assigns the winning door
@@ -91,4 +94,6 @@ def monty_hall(list_of_doors):
 
     user_choice = switch_door(list_of_doors, user_choice)  # User may change their door
 
-    # Output method required to determine if the user has won
+    #Output method required to determine if the user has won
+
+
