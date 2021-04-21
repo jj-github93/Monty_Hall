@@ -72,9 +72,6 @@ def monty_hall(list_of_doors):
     :param winning_door: winning door number
     :pararm user_choice: users selected door
     """
-    winning_door = randomise_winner()  # randomises winner
-    user_choice = door_selection()  # input function need to be created to be called
-
     winning_door = randomise_winner()
     user_choice = door_selection() # input function need to be created to be called
 
