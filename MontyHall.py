@@ -126,7 +126,6 @@ class Doors:
                 print("Unknown response, try again.")
 
 
-
 door1 = Doors(1)  # Create door objects
 door2 = Doors(2)
 door3 = Doors(3)
