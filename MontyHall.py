@@ -125,6 +125,18 @@ class Doors:
             else:
                 print("Unknown response, try again.")
 
+        play_again = input("Would you like to play again").upper()
+        if play_again == "Y":
+            door1.reset()
+            door2.reset()
+            door3.reset()
+            return
+        elif play_again == "N":
+            exit()
+        else:
+            print("Unknown response, try again.")
+            return play_again()
+
 
 door1 = Doors(1)  # Create door objects
 door2 = Doors(2)
