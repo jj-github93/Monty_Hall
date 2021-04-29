@@ -10,7 +10,6 @@ class Doors:
         self.door_number = door_number  # Assigns the door a number to be referenced
         self.winner = False  # Determines if the door is a winner/loser
         self.user_selection = False  # Determines if the user has selected this door
-        self.open = False  # Determine if the door has been opened
         self.reset()
 
     def reset(self):
@@ -19,7 +18,6 @@ class Doors:
         """
         self.winner = False
         self.user_selection = False
-        self.open = False
 
     @staticmethod
     def randomise_winner():
@@ -48,6 +46,32 @@ class Doors:
                 else:
                     print(f"You have chosen door {user_choice}")
                     return user_choice
+
+    @staticmethod
+    def monty_hall(list_of_doors):
+        """
+        This function is a text based Monty Hall Problem
+        :param list_of_doors: list of doors within the problem
+        :param winning_door: winning door number
+        :param user_choice: users selected door
+        """
+
+        winning_door = Doors.randomise_winner()
+        user_choice = Doors.door_selection()  # input function need to be created to be called
+
+        # Assigns the selected door to the user
+        list_of_doors[user_choice - 1].user_selection = True
+        # Assigns the winning door
+        list_of_doors[winning_door - 1].winner = True
+
+        """Opens a losing door and removes it from the list"""
+        for door in list_of_doors:
+            if not door.user_selection and not door.winner:
+                print(f"Door {door.door_number} was empty")
+                break
+
+        user_choice = Doors.switch_door(list_of_doors, user_choice)  # User may change their door
+        Doors.tell_winner(winning_door, user_choice)
 
     @staticmethod
     def switch_door(list_of_doors, user_choice):
@@ -88,31 +112,18 @@ class Doors:
             print(f"You have chosen door number {user_choice}. The winning door is {winning_door}. You Lost!")
 
     @staticmethod
-    def monty_hall(list_of_doors):
-        """
-        This function is a text based Monty Hall Problem
-        :param list_of_doors: list of doors within the problem
-        :param winning_door: winning door number
-        :pararm user_choice: users selected door
-        """
-
-        winning_door = Doors.randomise_winner()
-        user_choice = Doors.door_selection()  # input function need to be created to be called
-
-        # Assigns the selected door to the user
-        list_of_doors[user_choice - 1].user_selection = True
-        # Assigns the winning door
-        list_of_doors[winning_door - 1].winner = True
-
-        """Opens a losing door and removes it from the list"""
-        for door in list_of_doors:
-            if not door.user_selection and not door.winner:
-                print(f"Door {door.door_number} was empty")
-                door.open = True  # Sets the door attribute to open
-                break
-
-        user_choice = Doors.switch_door(list_of_doors, user_choice)  # User may change their door
-        Doors.tell_winner(winning_door, user_choice)
+    def play_again():
+        play_again = input("Would you like to play again").upper()
+        if play_again == "Y":
+            door1.reset()
+            door2.reset()
+            door3.reset()
+            return
+        elif play_again == "N":
+            exit()
+        else:
+            print("Unknown response, try again.")
+            return play_again()
 
 
 door1 = Doors(1)  # Create door objects
@@ -122,4 +133,12 @@ door3 = Doors(3)
 # Adds doors into list
 list_of_doors = [door1, door2, door3]
 
-Doors.monty_hall(list_of_doors)
+
+def main():
+    while True:
+        Doors.monty_hall(list_of_doors)
+        Doors.play_again()
+
+
+if __name__ == "__main__":
+    main()
