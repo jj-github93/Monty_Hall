@@ -113,17 +113,18 @@ class Doors:
 
     @staticmethod
     def play_again():
-        play_again = input("Would you like to play again").upper()
-        if play_again == "Y":
-            door1.reset()
-            door2.reset()
-            door3.reset()
-            return
-        elif play_again == "N":
-            exit()
-        else:
-            print("Unknown response, try again.")
-            return play_again()
+        while True:
+            play_again = input("Would you like to play again? \n").upper()
+            if play_again == "Y" or play_again == "YES":
+                door1.reset()
+                door2.reset()
+                door3.reset()
+                return
+            elif play_again == "NO" or play_again == "NO":
+                exit()
+            else:
+                print("Unknown response, try again.")
+                return play_again()
 
 
 door1 = Doors(1)  # Create door objects
