@@ -120,11 +120,11 @@ class Doors:
                 door2.reset()
                 door3.reset()
                 return
-            elif play_again == "NO" or play_again == "NO":
+            elif play_again == "N" or play_again == "NO":
                 exit()
             else:
                 print("Unknown response, try again.")
-                return play_again()
+
 
 
 door1 = Doors(1)  # Create door objects
