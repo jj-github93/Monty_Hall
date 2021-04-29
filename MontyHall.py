@@ -32,21 +32,20 @@ def randomise_winner():
 
 def door_selection():
     """User selects a door"""
-    try:
-        user_choice = int(input("Choose a door 1-3"))
+    while True:
+      try:
+          user_choice = int(input("Choose a door 1-3: \n"))
 
-    except ValueError:
-        print("Your choice should be numeric. Try again")
-        door_selection()
+      except ValueError:
+          print("Your choice should be numeric. Try again")
 
-    else:
-        if user_choice > 3 or user_choice < 1:
-            print("Your should be from 1-3 inclusive. Try again")
-            door_selection()
-
-        else:
-            print("Your choice is ", user_choice)
-            return user_choice
+      else:
+          if user_choice not in range(1,4):
+              print("Your should be from 1-3 inclusive. Try again")
+              
+          else:
+              print("Your choice is ", user_choice)
+              return user_choice
 
 
 # user_choice needs to be created from input function
@@ -78,7 +77,14 @@ def switch_door(list_of_doors, user_choice):
         else:
             print("Invalid selection, try again.")
 
+def tell_winner(winning_door, user_choice):
+  """Function to determine if the user has won. Checking the user selected door with the winning door"""
+    if winning_door == user_choice:
+        print(f"You have chosen door number {user_choice}. The winning door is {winning_door}. You Won!")
 
+    else:
+        print(f"You have chosen door number {user_choice}. The winning door is {winning_door}. You Lost!")            
+            
 def monty_hall(list_of_doors):
     """
     This function is a text based Monty Hall Problem
@@ -107,15 +113,5 @@ def monty_hall(list_of_doors):
     user_choice = switch_door(list_of_doors, user_choice)  # User may change their door
     tell_winner(winning_door, user_choice)
 
-#Output method required to determine if the user has won
-
-
-def tell_winner(winning_door, user_choice):
-    if winning_door == user_choice:
-        print("You have chosen door number ", user_choice, ". The winning door is ", winning_door, "You won!")
-
-    else:
-        print("You have chosen door number ", user_choice, ". The wining door is ", winning_door, "You lost...")
-
-
 monty_hall(list_of_doors)
+
