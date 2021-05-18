@@ -17,6 +17,7 @@ class User(Base):
     losses = Column("Losses", Integer, default=0)
     win_loss = Column("Win/Loss", Float, default=0.0)
 
+    
     @staticmethod
     def session_maker(db):
         """
@@ -85,3 +86,4 @@ class User(Base):
         session = User.session_maker(db)
         session.commit()
         session.close()
+
