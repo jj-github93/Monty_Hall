@@ -1,4 +1,5 @@
 from random import randint
+from Monty_Hall.database.data_management import User
 
 
 class Doors:
@@ -168,6 +169,12 @@ class MontyHall(Doors):
 
 
 def main():
+    db = "sqlite:///database/user.db"
+
+    User.init_db(db)
+
+    user_name = User.add_user(db)
+
     # Create playing variable
     playing = True
 
@@ -186,6 +193,8 @@ def main():
         game.monty_hall(doors_list)
         game.scoreboard()
         playing = MontyHall.play_again(playing, door1, door2, door3)
+
+    User.update_user(user_name, game.games, game.wins, game.losses, game.win_loss, db)
 
 
 if __name__ == "__main__":
