@@ -169,7 +169,7 @@ class MontyHall(Doors):
 
 
 def main():
-    db = "sqlite:///database/user.db"
+    db = "sqlite:///database/users.db"
 
     User.init_db(db)
 
@@ -195,6 +195,7 @@ def main():
         playing = MontyHall.play_again(playing, door1, door2, door3)
 
     User.update_user(user_name, game.games, game.wins, game.losses, game.win_loss, db)
+
 
 
 if __name__ == "__main__":
