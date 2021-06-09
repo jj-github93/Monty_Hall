@@ -17,7 +17,6 @@ class User(Base):
     losses = Column("Losses", Integer, default=0)
     win_loss = Column("Win/Loss", Float, default=0.0)
 
-    
     @staticmethod
     def session_maker(db):
         """
@@ -43,6 +42,7 @@ class User(Base):
         session = User.session_maker(db)
 
         new_user = User()
+
         while True:
             try:
                 new_username = input("Enter a unique username: \n").upper()
@@ -55,6 +55,7 @@ class User(Base):
                 session.close()
             else:
                 session.close()
+                break
 
         return new_username
 
